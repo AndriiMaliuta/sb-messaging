@@ -1,4 +1,4 @@
-package com.example.sbmessaging.mq;
+package com.andmal.mq.mq;
 
 import org.apache.camel.Configuration;
 import org.springframework.amqp.core.Binding;
@@ -12,12 +12,12 @@ import org.springframework.context.annotation.Bean;
 
 @Configuration
 public class MQConfig {
-    public static final String QUE_NAME = "queue1";
-    public static final String TOPIC_NAME = "main_topic";
+    public static final String QUE_NAME = "queue.one";
+    public static final String TOPIC_NAME = "main.topic";
 
     @Bean
-    Queue queue1() {
-        return new Queue(QUE_NAME);
+    Queue queue() {
+        return new Queue(QUE_NAME, false);
     }
 
     @Bean
@@ -26,12 +26,13 @@ public class MQConfig {
     }
 
     @Bean
-    Binding binding(Queue queue, TopicExchange topic) {
-        return BindingBuilder.bind(queue).to(topic).with("contr.act.#");
+    Binding binding(Queue queue, TopicExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with(QUE_NAME);
     }
 
     @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
+    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
+                                             MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames(QUE_NAME);
@@ -40,7 +41,7 @@ public class MQConfig {
     }
 
     @Bean
-    MessageListenerAdapter listenerAdapter(Receiver receiver) {
+    MessageListenerAdapter listenerAdapter(MyReceiver receiver) {
         return new MessageListenerAdapter(receiver, "receiveMessage");
     }
 }

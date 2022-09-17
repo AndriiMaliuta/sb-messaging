@@ -1,11 +1,11 @@
-package com.example.sbmessaging.mq;
+package com.andmal.mq.mq;
 
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CountDownLatch;
 
 @Component
-public class Receiver {
+public class MyReceiver {
     private CountDownLatch latch = new CountDownLatch(1);
 
     public void receiveMessage(String message) {
