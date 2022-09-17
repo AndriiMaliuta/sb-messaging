@@ -1,12 +1,13 @@
 package com.example.sbmessaging.mq;
 
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
-@Service
+@RabbitListener(queues = "queue1")
 public class RMQlistener {
 
-    @RabbitListener(queues = "queue1")
+    @RabbitHandler
     public void processMsg(String msg) {
         System.out.println(">>> listening to msg :: " + msg);
     }

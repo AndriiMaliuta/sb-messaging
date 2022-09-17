@@ -9,8 +9,8 @@ spring:
     username: andmal
     password: andmal
     stream:
-      name: queue1
+      name: stream1
     template:
       retry:
         enabled: true
-        initial-interval: 3s
+        initial-interval: 10s
