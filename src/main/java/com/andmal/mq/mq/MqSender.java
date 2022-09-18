@@ -16,8 +16,8 @@ public class MqSender {
 
     @Scheduled(fixedDelay = 10000, initialDelay = 2000)
     public void send() {
-        String message = "Hello World!";
+        String message = "Hello from Spring Boot!";
         this.rabbitTemplate.convertAndSend(MQConfig.QUE_NAME, message);
-        System.out.println(" [*] MqSender Sent '" + message + "'");
+        System.out.println(" [>>] MqSender Sent '" + message + "'");
     }
 }

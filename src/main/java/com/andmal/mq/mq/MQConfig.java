@@ -41,7 +41,7 @@ public class MQConfig {
     }
 
     @Bean
-    MessageListenerAdapter listenerAdapter(MyReceiver receiver) {
+    MessageListenerAdapter listenerAdapter(MyReceiverLatch receiver) {
         return new MessageListenerAdapter(receiver, "receiveMessage");
     }
 }

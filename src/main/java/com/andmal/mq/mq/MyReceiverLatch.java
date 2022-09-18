@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.CountDownLatch;
 
 @Component
-public class MyReceiver {
+public class MyReceiverLatch {
     private CountDownLatch latch = new CountDownLatch(1);
 
     public void receiveMessage(String message) {
